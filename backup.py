@@ -45,7 +45,7 @@ def logging(errorMessage, dateTimeStamp):
     
 def error(errorMessage, dateTimeStamp):
     print(f'FAILURE{errorMessage}')
-    logging(f'FAILURE{errorMessage}', dateTimeStamp
+    logging(f'FAILURE{errorMessage}', dateTimeStamp)
     sendEmail(errorMessage, dateTimeStamp)
     # email message
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           # write failure to log
