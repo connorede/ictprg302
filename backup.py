@@ -1,5 +1,9 @@
 #!/usr/bin/python3
 
+"""
+Connor Ede Copyright 2024
+"""
+
 import sys
 import os
 from datetime import datetime
@@ -32,7 +36,7 @@ def logging(errorMessage, dateTimeStamp):
     
         file = open(logPath, "a")
         
-        file.write(f"Failure {errorMessage}.\n")
+        file.write(f"{errorMessage}.\n")
   
         
         file.close()
@@ -45,12 +49,11 @@ def logging(errorMessage, dateTimeStamp):
     
 def error(errorMessage, dateTimeStamp):
     print(f'FAILURE{errorMessage}')
-    logging(f'FAILURE{errorMessage}', dateTimeStamp)
-    sendEmail(errorMessage, dateTimeStamp)
+    logging(f'FAILURE{errorMessage}', dateTimeStamp)    
+    sendEmail(errorMessage)
     # email message
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           # write failure to log
     
-    sendEmail(errorMessage)
 
 def main():
     dateTimeStamp = datetime.now().strftime("%Y%m%d-%H%M%S") 
@@ -62,23 +65,24 @@ def main():
         if jobname not in jobs:
             error(f"ERROR: jobname {jobname} not defined.", dateTimeStamp)
         else:
-            source = jobs [jobname]
-            if not os.path.exists(source):
-                error("ERROR: file " + source + " does not exist.", dateTimeStamp)
-            else:
-                if not os.path.exists(dspath):
-                    error("ERROR: dirctory " + dspath + " does not exist.", dateTimeStamp)
+            for source in jobs [jobname]:
+                if not os.path.exists(source):
+                    error("ERROR: file " + source + " does not exist.", dateTimeStamp)
                 else:
-                    pass
-                    
-                    srcPath = pathlib.PurePath(source)
-                    
-                    dstLoc = dspath + "/" + srcPath.name + "-" + dateTimeStamp
-                    
-                    if pathlib.Path(source).is_dir():
-                        shutil.copytree(source, dstLoc)
+                    if not os.path.exists(dspath):
+                        error("ERROR: dirctory " + dspath + " does not exist.", dateTimeStamp)
                     else:
-                        shutil.copy2(source, dstLoc)
+                        pass
+                        
+                        srcPath = pathlib.PurePath(source)
+                        
+                        dstLoc = dspath + "/" + srcPath.name + "-" + dateTimeStamp
+                        
+                        if pathlib.Path(source).is_dir():
+                            shutil.copytree(source, dstLoc)
+                        else:
+                            shutil.copy2(source, dstLoc)
+                        logging(f'success copied {source} to {dstLoc} ', dateTimeStamp)
    
    
    
