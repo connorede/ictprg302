@@ -14,5 +14,5 @@ smtp = {"sender": "edeconnor2@gmail.com              ",    # elasticemail.com ve
         "server": "smtp.elasticemail.com",      # elasticemail.com SMTP server
         "port": 2525,                           # elasticemail.com SMTP port
         "user": "edeconnor2@gmail.com",      # elasticemail.com user
-        "password": ""}     # elasticemail.com password
+        "password": "C8BC6DB2D3E38AB4BBB15CF12198EDF7F409"}     # elasticemail.com password
         
